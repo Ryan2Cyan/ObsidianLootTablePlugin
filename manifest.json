@@ -1,6 +1,6 @@
 {
-	"id": "sample-plugin",
-	"name": "Loot Table Generator",
+	"id": "dnd-loot-table-generator",
+	"name": "DnD Loot Table Generator",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "Demonstrates some of the capabilities of the Obsidian API.",
