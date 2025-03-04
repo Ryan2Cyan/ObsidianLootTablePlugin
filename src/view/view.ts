@@ -1,4 +1,5 @@
 import {
+	// addIcon,
 	// ButtonComponent,
 	// ExtraButtonComponent,
 	ItemView,
@@ -9,11 +10,15 @@ import {
 } from "obsidian";
 
 import type LootTablePlugin from "src/main";
+import {
+	BASE
+} from "src/utils/icons";
+
+// import { type DiceIcon, IconManager } from "./view.icons";
+
 // import { StackRoller } from "src/rollers/dice/stack";
 // import { ExpectedValue } from "../types/api";
 // import { API } from "../api/api";
-// import { type DiceIcon, IconManager } from "./view.icons";
-import { Icons } from "src/utils/icons";
 // import { nanoid } from "nanoid";
 // import DiceTray from "./ui/DiceTray.svelte";
 // import type { RenderableRoller } from "src/rollers/roller";
@@ -398,12 +403,13 @@ export default class LootTableView extends ItemView {
 	getDisplayText() {
 		return "Loot Table";
 	}
+
 	getViewType() {
 		return VIEW_TYPE;
 	}
 
 	getIcon() {
-		return Icons.DICE;
+		return BASE;
 	}
 
 	async onClose() {

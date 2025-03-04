@@ -1,5 +1,14 @@
-import { Plugin, /*Notice,*/ WorkspaceLeaf } from "obsidian";
-import LootTableView, { VIEW_TYPE } from "./view/view";
+import {
+	Plugin, /*Notice,*/ WorkspaceLeaf
+} from "obsidian";
+
+import LootTableView, {
+	VIEW_TYPE
+} from "./view/view";
+
+import {
+	registerIcons
+} from "./utils/icons"
 
 // import { StackRoller } from "./rollers/dice/stack";
 // import SettingTab from "./settings/settings";
@@ -42,6 +51,9 @@ export default class LootTablePlugin extends Plugin {
 		// await this.loadSettings();
 		// console.log(`LootTable v${this.data.version} loaded`);
 		console.log(`LootTable loaded`);
+
+		// load in icons:
+		registerIcons();
 
 		// LootTableRenderer.setData(this.getRendererData());
 
