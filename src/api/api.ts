@@ -1,10 +1,10 @@
-import type {
-	App
+import {
+	App, FileSystemAdapter
 } from "obsidian";
 
 import {
 	// ButtonPosition,
-	type LootTableSettings
+	// type LootTableSettings
 } from "../settings/settings.types";
 
 import * as fs from 'fs';
@@ -56,7 +56,7 @@ declare global {
 	}
 }
 
-enum ItemType {
+export enum ItemType {
 	CLOAKS = "cloaks"
 }
 
@@ -86,33 +86,42 @@ enum ItemType {
 
 class APIInstance {
 	app: App;
-	data: LootTableSettings;
+	/*data: LootTableSettings;*/
 
-	initialize(data: LootTableSettings, app: App) {
-		this.data = data;
+	initialize(/*data: LootTableSettings,*/ app: App) {
+		/*this.data = data;*/
 		this.app = app;
 	}
 
-	getRandomValueFromJSON(filePath: string, category: string): string | null {
-		try {
-			// Read the JSON file and parse it
-			const data = fs.readFileSync(filePath, 'utf-8');
-			const json = JSON.parse(data);
+	getRandomValueFromJSON(itemType: ItemType, category: string): string | null {
 
-			// Ensure the category exists in the JSON
-			if (!json[category] || !Array.isArray(json[category])) {
-				console.error(`Category "${category}" does not exist or is not an array in the JSON file.`);
+		if (this.app.vault.adapter instanceof FileSystemAdapter) { // true if desktop
+
+			// get the .json file path for the specified item type:
+			const filePath = this.app.vault.adapter.getBasePath() + "\\.obsidian\\plugins\\ObsidianLootTablePlugin\\src\\items\\" + itemType + ".json";
+
+			try {
+				// Read the JSON file and parse it
+				const data = fs.readFileSync(filePath, 'utf-8');
+				const json = JSON.parse(data);
+
+				// Ensure the category exists in the JSON
+				if (!json[category] || !Array.isArray(json[category])) {
+					console.error(`Category "${category}" does not exist or is not an array in the JSON file.`);
+					return null;
+				}
+
+				// Get a random value from the specified category
+				const items = json[category];
+				const randomIndex = Math.floor(Math.random() * items.length);
+				return items[randomIndex];
+
+			} catch (error) {
+				console.error('Error reading or parsing JSON file:', error);
 				return null;
 			}
-
-			// Get a random value from the specified category
-			const items = json[category];
-			const randomIndex = Math.floor(Math.random() * items.length);
-			return items[randomIndex];
-		} catch (error) {
-			console.error('Error reading or parsing JSON file:', error);
-			return null;
 		}
+		return null;
 	}
 
 

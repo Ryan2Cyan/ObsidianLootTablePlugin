@@ -1,5 +1,8 @@
 import {
-	Plugin, /*Notice,*/ WorkspaceLeaf
+	FileSystemAdapter,
+	Plugin,
+	/*Notice,*/
+	WorkspaceLeaf
 } from "obsidian";
 
 import LootTableView, {
@@ -10,13 +13,16 @@ import {
 	registerIcons
 } from "./utils/icons"
 
+import {
+	API
+} from "./api/api";
+
 // import { StackRoller } from "./rollers/dice/stack";
 // import SettingTab from "./settings/settings";
 // import { LootTableRenderer, type RendererData } from "./renderer/renderer";
 // import { Lexer } from "./lexer/lexer";
 // import { type RollerOptions } from "./api/api";
 // import { inlinePlugin } from "./processor/live-preview";
-// import { API } from "./api/api";
 
 // import {
 // 	ButtonPosition,
@@ -30,7 +36,7 @@ import {
 
 export default class LootTablePlugin extends Plugin {
 
-	// api = API;
+	api = API;
 	// data: DiceRollerSettings;
 	// processor: DiceProcessor;
 
@@ -52,12 +58,15 @@ export default class LootTablePlugin extends Plugin {
 		// console.log(`LootTable v${this.data.version} loaded`);
 		console.log(`LootTable loaded`);
 
+
+		// initialize api:
+		this.api.initialize(this.app);
+		// this.api.initialize(/*this.data,*/ this.app);
+
 		// load in icons:
 		registerIcons();
 
 		// LootTableRenderer.setData(this.getRendererData());
-
-		// this.api.initialize(this.data, this.app);
 
 		// global window object:
 		// window["LootTable"] = this.api;

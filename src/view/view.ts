@@ -1,24 +1,26 @@
 import {
-	// addIcon,
-	// ButtonComponent,
-	// ExtraButtonComponent,
+	ButtonComponent,
+	ExtraButtonComponent,
 	ItemView,
-	// Notice,
-	// Platform,
-	// TextAreaComponent,
+	TextAreaComponent,
+	DropdownComponent,
 	WorkspaceLeaf
 } from "obsidian";
 
 import type LootTablePlugin from "src/main";
+
 import {
-	BASE
+	BASE, DICE, REMOVE, SAVE
 } from "src/utils/icons";
+
+import {
+	API, ItemType
+} from "../api/api";
 
 // import { type DiceIcon, IconManager } from "./view.icons";
 
 // import { StackRoller } from "src/rollers/dice/stack";
 // import { ExpectedValue } from "../types/api";
-// import { API } from "../api/api";
 // import { nanoid } from "nanoid";
 // import DiceTray from "./ui/DiceTray.svelte";
 // import type { RenderableRoller } from "src/rollers/roller";
@@ -36,22 +38,23 @@ export const VIEW_TYPE = "LOOT_TABLE_VIEW";
 // }
 
 export default class LootTableView extends ItemView {
-	/*noResultsEl: HTMLSpanElement;
+	noResultsEl: HTMLSpanElement;
+	resultEl: HTMLDivElement;
 	rollButton: ButtonComponent;
 	saveButton: ExtraButtonComponent;
-	stack: StackRoller;
-	gridEl: HTMLDivElement;
-	formulaEl: HTMLDivElement;
-	get customFormulas() {
-		return this.plugin.data.customFormulas;
-	}
-	custom = "";
-	#adv = false;
-	#dis = false;
-	#add = 0;
+	resultsTextBoxEl: HTMLDivElement;
+	// stack: StackRoller;
+	// gridEl: HTMLDivElement;
+	// get customFormulas() {
+	// 	return this.plugin.data.customFormulas;
+	// }
+	// custom = "";
+	// #adv = false;
+	// #dis = false;
+	// #add = 0;
 
 	formulaComponent: TextAreaComponent;
-	resultEl: HTMLDivElement;*/
+
 
 	// #icons = IconManager;
 	constructor(public plugin: LootTablePlugin, public leaf: WorkspaceLeaf) {
@@ -96,38 +99,130 @@ export default class LootTableView extends ItemView {
 		this.contentEl.empty();
 
 		// this.gridEl = this.contentEl.createDiv("loot-table-grid");
-		// this.formulaEl = this.contentEl.createDiv("loot-table-formula");
-
-		const headerEl = this.contentEl.createDiv("options-header-container");
-		headerEl.createEl("h1", { cls: "results-header", text: "Loot Table Options" });
-		headerEl.createEl("p", { cls: "results-header", text: "I love Cloe :)" });
-
-
-		/*new ExtraButtonComponent(headerEl.createDiv("clear-all"))
-			.setIcon(Icons.DELETE)
-			.setTooltip("Clear All")
-			.onClick(async () => {
-				this.resultEl.empty();
-				this.resultEl.append(this.noResultsEl);
-				this.plugin.data.viewResults = [];
-				await this.plugin.saveSettings();
-			});*/
-		/*const resultsEl = */this.contentEl.createDiv(
-			"loot-table-results-container"
-		);
-		// this.resultEl = resultsEl.createDiv("loot-table-results");
-		// this.noResultsEl = this.resultEl.createSpan({
-		// 	text: "No results yet! Roll some dice to get started :)"
-		// });
 
 		// for (const result of this.plugin.data.viewResults) {
 		// 	this.addResult(result, false);
 		// }
 
 		// this.buildButtons();
-		// this.buildFormula();
+		this.buildSettings();
+		this.buildResults();
 	}
 
+	buildSettings() {
+
+		// add header:
+		const settingsHeaderEl = this.contentEl.createDiv("settings-header-container");
+		settingsHeaderEl.createEl("h1", { cls: "settings-header", text: "Settings:" });
+
+		const resultsEl = settingsHeaderEl.createDiv("settings-text");
+		this.resultEl = resultsEl.createDiv("settings-text");
+		this.noResultsEl = this.resultEl.createSpan({
+			text: "Text..."
+		});
+
+		const itemTypeDropdown = new DropdownComponent(settingsHeaderEl)
+			.addOption("All", "all")
+			.addOption("Cloaks", "cloaks")
+			.addOption("Gloves", "gloves")
+			.addOption("Helmets", "helmets")
+			.addOption("Pants", "pants")
+			.addOption("Rings", "rings")
+			.addOption("Shields", "shields")
+			.addOption("Swords", "swords")
+			.addOption("Wands", "wands");
+	}
+
+	buildResults() {
+
+		// add header:
+		const resultsHeaderEl = this.contentEl.createDiv("results-header-container");
+		resultsHeaderEl.createEl("h1", { cls: "results-header", text: "Results:" });
+
+		// create div for results containing a text box:
+		this.resultsTextBoxEl = resultsHeaderEl.createDiv("loot-table-formula");
+		this.resultsTextBoxEl.empty();
+		this.formulaComponent = new TextAreaComponent(this.resultsTextBoxEl)
+			.setPlaceholder("This chest must have been a mimic! Try another!")
+
+		// create div for buttons:
+		const buttons = this.resultsTextBoxEl.createDiv("action-buttons");
+
+		// create roll loot button:
+		this.rollButton = new ButtonComponent(buttons)
+			.setIcon(DICE)
+			.setCta()
+			.setTooltip("Roll Loot")
+		.onClick(() => this.roll());
+		this.rollButton.buttonEl.addClass("loot-roller-roll");
+
+		// create save loot button:
+		this.saveButton = new ExtraButtonComponent(buttons)
+			.setIcon(SAVE)
+			.setTooltip("Save Loot")
+			/*.onClick(() => this.save())*/;
+		this.saveButton.extraSettingsEl.addClass("loot-roller-roll");
+
+		// add clear button inside:
+		new ExtraButtonComponent(resultsHeaderEl.createDiv("clear-all"))
+			.setIcon(REMOVE)
+			.setTooltip("Clear All")
+			.onClick(async () => {
+					this.resultEl.empty();
+					this.resultEl.append(this.noResultsEl);
+					/*this.plugin.data.viewResults = [];
+					await this.plugin.saveSettings();*/
+				}
+		);
+
+		/*.onChange((v) => (this.#formula = new Map()));*/
+	}
+
+	async roll(/*formula = this.formulaComponent.inputEl.value*/) {
+
+		// // return if there is no passed in string:
+		// if (!formula) {
+		// 	return;
+		// }
+
+		// // disable the roll button to prevent multiple rolls simultaneously:
+		// this.rollButton.setDisabled(true);
+
+		const generatedItem =  API.getRandomValueFromJSON(ItemType.CLOAKS, "wizard");
+		if(generatedItem != null) console.log(generatedItem);
+		this.formulaComponent.setValue(generatedItem ?? "");
+
+		// const opts = {
+		// 	...API.getRollerOptions(this.plugin.data)
+		// };
+		// if (opts.expectedValue == ExpectedValue.None) {
+		// 	opts.expectedValue = ExpectedValue.Roll;
+		// }
+		// try {
+		// 	const roller = await API.getRoller(formula, VIEW_TYPE, opts);
+		// 	if (roller == null) return;
+		// 	if (!(roller instanceof StackRoller)) {
+		// 		throw new Error("The Dice Tray only supports dice rolls.");
+		// 	}
+		// 	roller.iconEl.detach();
+		// 	roller.containerEl.onclick = null;
+		// 	roller.buildDiceTree();
+		// 	if (!roller.children.length) {
+		// 		throw new Error("No dice.");
+		// 	}
+		// 	await roller.roll(this.plugin.data.renderer).catch((e) => {
+		// 		throw e;
+		// 	});
+		// } catch (e: any) {
+		// 	new Notice("Invalid Formula: " + e.message);
+		// } finally {
+		// 	this.rollButton.setDisabled(false);
+		// 	this.buildButtons();
+		// 	this.#formula = new Map();
+		// 	this.#add = 0;
+		// 	this.setFormula();
+		// }
+	}
 	/*#formula: Map<DiceIcon, number> = new Map();
 	buildButtons() {
 		this.gridEl.empty();
@@ -257,64 +352,10 @@ export default class LootTableView extends ItemView {
 			str.push(`${Math.abs(this.#add)}`);
 		}
 		this.formulaComponent.inputEl.value = str.join(" ");
-	}
-	async roll(formula = this.formulaComponent.inputEl.value) {
-		if (!formula) {
-			return;
-		}
-		this.rollButton.setDisabled(true);
-		const opts = {
-			...API.getRollerOptions(this.plugin.data)
-		};
-		if (opts.expectedValue == ExpectedValue.None) {
-			opts.expectedValue = ExpectedValue.Roll;
-		}
-		try {
-			const roller = await API.getRoller(formula, VIEW_TYPE, opts);
-			if (roller == null) return;
-			if (!(roller instanceof StackRoller)) {
-				throw new Error("The Dice Tray only supports dice rolls.");
-			}
-			roller.iconEl.detach();
-			roller.containerEl.onclick = null;
-			roller.buildDiceTree();
-			if (!roller.children.length) {
-				throw new Error("No dice.");
-			}
-			await roller.roll(this.plugin.data.renderer).catch((e) => {
-				throw e;
-			});
-		} catch (e: any) {
-			new Notice("Invalid Formula: " + e.message);
-		} finally {
-			this.rollButton.setDisabled(false);
-			this.buildButtons();
-			this.#formula = new Map();
-			this.#add = 0;
-			this.setFormula();
-		}
-	}
-	buildFormula() {
-		this.formulaEl.empty();
-		this.formulaComponent = new TextAreaComponent(this.formulaEl)
-			.setPlaceholder("Dice Formula")
-			.onChange((v) => (this.#formula = new Map()));
+	}*/
 
-		const buttons = this.formulaEl.createDiv("action-buttons");
-		this.saveButton = new ExtraButtonComponent(buttons)
-			.setIcon(Icons.SAVE)
-			.setTooltip("Save Formula")
-			.onClick(() => this.save());
-		this.saveButton.extraSettingsEl.addClass("dice-roller-roll");
 
-		this.rollButton = new ButtonComponent(buttons)
-			.setIcon(Icons.DICE)
-			.setCta()
-			.setTooltip("Roll")
-			.onClick(() => this.roll());
-		this.rollButton.buttonEl.addClass("dice-roller-roll");
-	}
-	save() {
+	/*save() {
 		if (!this.formulaComponent.inputEl.value) return;
 		this.plugin.data.customFormulas.push(
 			this.formulaComponent.inputEl.value

@@ -1,4 +1,4 @@
 {
-	"weapons": ["Sword", "Axe", "Bow"],
+	"wizard": ["Sword", "Axe", "Bow"],
 	"armors": ["Plate Armor", "Chainmail", "Leather Armor"]
 }
