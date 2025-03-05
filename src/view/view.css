@@ -1,0 +1,243 @@
+/** Dice Roller View CSS */
+
+
+.loot-table-view /*.dice-roller-results-container*/ .loot-table-results-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 6px 0px;
+	width: 100%;
+	/*border-bottom: 1px solid var(--background-modifier-border);*/
+}
+.loot-table-view
+.dice-roller-results-container
+.dice-roller-results-header
+
+h1 {
+	margin: 300px;
+}
+
+body{
+	color: white;
+}
+
+
+/*.workspace-split.mod-right-split .view-content.loot-table-view {*/
+/*	padding: 0.5rem;*/
+/*	display: flex;*/
+/*	flex-flow: column nowrap;*/
+/*	justify-content: flex-start;*/
+/*	gap: 12px;*/
+/*}*/
+
+/*.loot-table-view .setting-editor-extra-setting-button {*/
+/*	width: fit-content;*/
+/*}*/
+
+/*.loot-table-view .loot-context {*/
+/*	display: grid;*/
+/*	grid-template-columns: 1fr auto;*/
+/*}*/
+
+/*.loot-table-view .loot-context .add-subtract {*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*}*/
+/*.loot-table-view!*  .dice-context *! input, .loot-table-view textarea {*/
+/*	width: 100%;*/
+/*}*/
+
+/*!* @import "./renderer/font.css";*/
+/* *!*/
+/*!*.renderer-container {*!*/
+/*!*	position: absolute;*!*/
+/*!*	top: 0;*!*/
+/*!*	left: 0;*!*/
+/*!*	width: 100vw;*!*/
+/*!*	height: 100vh;*!*/
+
+/*!*	pointer-events: none;*!*/
+/*!*	z-index: 9999999;*!*/
+/*!*	transition: opacity 1s ease-out;*!*/
+/*!*}*!*/
+
+/*.dice-roller-view .dice-roller-roll:disabled {*/
+/*	cursor: not-allowed;*/
+/*	opacity: 0.75;*/
+/*}*/
+
+/*!** Dice Roller View CSS *!*/
+/*.workspace-split.mod-right-split .view-content.dice-roller-view {*/
+/*	padding: 0.5rem;*/
+/*	display: flex;*/
+/*	flex-flow: column nowrap;*/
+/*	justify-content: flex-start;*/
+/*	gap: 12px;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-grid {*/
+/*	display: grid;*/
+/*	grid-template-rows: auto auto;*/
+/*	justify-content: center;*/
+/*	gap: 6px;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-grid .dice-buttons {*/
+/*	display: flex;*/
+/*	flex-flow: row wrap;*/
+/*	align-items: center;*/
+/*	justify-content: center;*/
+/*	width: fit-content;*/
+/*}*/
+/*.dice-roller-view .dice-roller-grid .dice-custom-formula-container {*/
+/*	display: flex;*/
+/*	justify-content: space-between;*/
+/*	align-items: center;*/
+/*}*/
+/*.dice-roller-view .dice-roller-grid .dice-custom-formula {*/
+/*	display: flex;*/
+/*	justify-content: flex-start;*/
+/*	align-items: center;*/
+/*}*/
+
+/*.dice-roller-view .setting-editor-extra-setting-button {*/
+/*	width: fit-content;*/
+/*}*/
+
+/*.dice-button svg {*/
+/*	width: 36px;*/
+/*	height: 36px;*/
+/*}*/
+
+/*.dice-roller-view .dice-context {*/
+/*	display: grid;*/
+/*	grid-template-columns: 1fr auto;*/
+/*}*/
+/*.dice-roller-view .dice-context .add-subtract {*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*}*/
+/*.dice-roller-view!*  .dice-context *! input, .dice-roller-view textarea {*/
+/*	width: 100%;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-grid .advantage-disadvantage {*/
+/*	display: flex;*/
+/*	justify-content: center;*/
+/*	align-items: center;*/
+/*	gap: 0.5rem;*/
+/*}*/
+/*.dice-roller-view .dice-roller-grid .advantage-disadvantage button {*/
+/*	margin: 0;*/
+/*	min-width: 66px;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-formula {*/
+/*	display: flex;*/
+/*	flex-flow: column nowrap;*/
+/*	justify-content: space-between;*/
+/*	align-items: flex-end;*/
+/*	gap: 12px;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-formula .action-buttons {*/
+/*	display: flex;*/
+/*	justify-content: flex-end;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-formula button {*/
+/*	margin-right: 0;*/
+/*	margin-left: 12px;*/
+/*}*/
+
+/*.dice-roller-view hr {*/
+/*	margin-bottom: 0;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-results-container .dice-roller-results-header {*/
+/*	display: flex;*/
+/*	justify-content: space-between;*/
+/*	align-items: center;*/
+/*	margin: 6px 0px;*/
+/*	width: 100%;*/
+/*	border-bottom: 1px solid var(--background-modifier-border);*/
+/*}*/
+/*.dice-roller-view*/
+/*.dice-roller-results-container*/
+/*.dice-roller-results-header*/
+/*h4 {*/
+/*	margin: 0px;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-results {*/
+/*	display: flex;*/
+/*	flex-flow: column nowrap;*/
+/*	gap: 6px;*/
+/*}*/
+/*.dice-roller-view .dice-roller-results .view-result {*/
+/*	display: flex;*/
+/*	flex-flow: column nowrap;*/
+/*	justify-content: center;*/
+/*	align-items: center;*/
+/*	border: 1px solid var(--background-modifier-border);*/
+/*	border-radius: 0.25rem;*/
+/*	position: relative;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-results .view-result .dice-content-copy {*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	right: 0;*/
+/*	padding: 0.25rem;*/
+/*}*/
+/*.dice-roller-view .dice-roller-results .view-result .dice-result-reroll {*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	left: 0;*/
+/*	padding: 0.25rem;*/
+/*	margin: 0;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-results .view-result strong {*/
+/*	font-size: x-large;*/
+/*}*/
+/*.dice-roller-view .dice-roller-results .view-result .result-context {*/
+/*	align-self: flex-end;*/
+/*	width: 100%;*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*	justify-content: space-between;*/
+/*	padding: 0.25rem;*/
+/*	font-size: x-small;*/
+/*}*/
+/*.dice-roller-view*/
+/*.dice-roller-results*/
+/*.view-result*/
+/*.result-context*/
+/*.clickable-icon {*/
+/*	margin-right: 0;*/
+/*}*/
+
+/*.dice-roller-view .dice-roller-results > span {*/
+/*	color: var(--text-muted);*/
+/*	margin: 0 auto;*/
+/*}*/
+
+/*.dice-renderer {*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	left: 0;*/
+/*}*/
+
+/*.dice-button svg .font {*/
+/*	font-family: "ArialMT";*/
+/*	font-size: 200px;*/
+/*	fill: currentColor;*/
+/*}*/
+/*.dice-button svg .shape {*/
+/*	fill: none;*/
+/*	stroke: currentColor;*/
+/*	stroke-linecap: round;*/
+/*	stroke-linejoin: round;*/
+/*	stroke-width: 15px !important;*/
+/*}*/

@@ -1,7 +1,6 @@
 import {
-	FileSystemAdapter,
 	Plugin,
-	/*Notice,*/
+	// Notice,
 	WorkspaceLeaf
 } from "obsidian";
 
@@ -17,30 +16,36 @@ import {
 	API
 } from "./api/api";
 
+import {
+	// ButtonPosition,
+	type LootTableSettings
+} from "./settings/settings.types";
+
+import {
+	DEFAULT_SETTINGS
+} from "./settings/settings.const";
+
+import copy from "fast-copy";
+
+import { compare } from "compare-versions";
+
+// import { LootTableRenderer, type RendererData } from "./renderer/renderer";
+
 // import { StackRoller } from "./rollers/dice/stack";
 // import SettingTab from "./settings/settings";
-// import { LootTableRenderer, type RendererData } from "./renderer/renderer";
 // import { Lexer } from "./lexer/lexer";
 // import { type RollerOptions } from "./api/api";
 // import { inlinePlugin } from "./processor/live-preview";
-
-// import {
-// 	ButtonPosition,
-// 	type DiceRollerSettings
-// } from "./settings/settings.types";
-// import { DEFAULT_SETTINGS } from "/settings/settings.const";
 // import { DataviewManager } from "./api/api.dataview";
 // import DiceProcessor from "./processor/processor";
-// import copy from "fast-copy";
-// import { compare } from "compare-versions";
 
 export default class LootTablePlugin extends Plugin {
 
 	api = API;
-	// data: DiceRollerSettings;
+	data: LootTableSettings;
 	// processor: DiceProcessor;
 
-	// configures the renderer with settings:
+	// // configures the renderer with settings:
 	// getRendererData(): RendererData {
 	// 	return {
 	// 		diceColor: this.data.diceColor,
@@ -54,8 +59,8 @@ export default class LootTablePlugin extends Plugin {
 	// }
 
 	async onload() {
-		// await this.loadSettings();
-		// console.log(`LootTable v${this.data.version} loaded`);
+		await this.loadSettings();
+		console.log(`LootTable v${this.data.version} loaded`);
 		console.log(`LootTable loaded`);
 
 
@@ -166,49 +171,42 @@ export default class LootTablePlugin extends Plugin {
 		});
 	}
 
-	// // initialize and set up persistent plugin data:
-	// async loadSettings() {
-	//
-	// 	// load default settings:
-	// 	const data = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	// 	let dirty = false;
-	//
-	// 	// if the version is invalid or out of date, adjust the settings:
-	// 	if (typeof data.version !== "string") {
-	// 		delete data.version;
-	// 	}
-	// 	/*if (
-	// 		compare("11.2.0", data.version ?? "0.0.0", ">") &&
-	// 		!("position" in data)
-	// 	) {
-	// 		data. position = data.showDice
-	// 			? ButtonPosition.RIGHT
-	// 			: ButtonPosition.NONE;
-	// 		delete data["showDice"];
-	//
-	// 		dirty = true;
-	// 	}
-	// 	if (compare("11.0.0", data.version ?? "0.0.0", ">")) {
-	// 		delete data["persistResults"];
-	// 		delete data["results"];
-	// 		dirty = true;
-	// 	}*/
-	// 	if (compare(data.version ?? "0.0.0", this.manifest.version, "!=")) {
-	// 		data.version = this.manifest.version;
-	// 		dirty = true;
-	// 	}
-	//
-	// 	this.data = copy(data);
-	//
-	// 	// save the current plugin settings to persistent storage:
-	// 	if (dirty) {
-	// 		await this.saveSettings();
-	// 	}
-	// }
-	// async saveSettings() {
-	// 	await this.saveData(this.data);
-	// }
+	// load existing plugin settings (with defaults if no prior configuration exists:
+	async loadSettings() {
 
+		// load default settings:
+		const data = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+
+		// dirty bool to track whether settings have been modified:
+		let dirty = false;
+
+		// if the version is invalid or out of date, adjust the settings:
+		if (typeof data.version !== "string") {
+			delete data.version;
+		}
+
+		// if the stored data.version does not match the current version of the
+		// plugin, use this.manifest.version:
+		if (compare(data.version ?? "0.0.0", this.manifest.version, "!=")) {
+			data.version = this.manifest.version;
+			dirty = true;
+		}
+
+		// save modified data:
+		this.data = copy(data);
+
+		// save the current plugin settings to persistent storage:
+		if (dirty) {
+			await this.saveSettings();
+		}
+	}
+
+	// save to persist data into Obsidian's storage system:
+	async saveSettings() {
+		await this.saveData(this.data);
+	}
+
+	// called when the plugin is unloaded:
 	onunload() {
 		console.log("LootTable unloaded");
 		this.app.workspace

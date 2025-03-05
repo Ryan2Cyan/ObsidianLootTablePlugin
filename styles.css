@@ -2,7 +2,129 @@
 
 This CSS file will be included with your plugin, and
 available in the app when your plugin is enabled.
-
 If your plugin does not need CSS, delete this file.
-
 */
+
+/*@import "src/view/view.css";*/
+/*@import "./assets/main.css";*/
+/*@import "./settings/settings.css";*/
+/*@import "./renderer/font.css";*/
+
+.loot-table-view /*.loot-table-results-container*/ .loot-table-results-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 12px;
+	width: 100%;
+	border-bottom: 1px solid /*var(--background-modifier-border)*/;
+}
+.loot-table-view
+.loot-table-results-container
+.loot-table-results-header
+
+h1 {
+	margin: 0px;
+}
+
+.clear-all{
+	margin-top: 20px;
+}
+
+.loot-table-view .loot-table-results {
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 6px;
+}
+
+.loot-table-view .loot-table-results .view-result {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	/*border: 1px solid var(--background-modifier-border);*/
+	border-radius: 0.25rem;
+	position: relative;
+}
+
+.loot-table-view .loot-table-results .view-result .loot-content-copy {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.25rem;
+}
+
+.loot-table-view .loot-table-results .view-result .loot-result-reroll {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0.25rem;
+	margin: 0;
+}
+
+.loot-table-view .loot-table-results .view-result strong {
+	font-size: x-large;
+}
+
+.loot-table-view .loot-table-results .view-result .result-context {
+	align-self: flex-end;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.25rem;
+	font-size: x-small;
+}
+
+.loot-table-view
+.loot-table-results
+.view-result
+.result-context
+.clickable-icon {
+	margin-right: 0;
+}
+
+.loot-table-view .loot-table-results > span {
+	/*color: var(--text-muted);*/
+	margin: 0 auto;
+}
+
+.loot-table-view .loot-table-formula .action-buttons-right {
+	display: flex;
+	justify-content: flex-end;
+	align-items: stretch;
+	flex-flow: row wrap;
+	margin-right: 100px;
+}
+
+.action-buttons-left {
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 12px;
+}
+
+.action-buttons{
+	display: flex;
+	flex-flow: row wrap;
+	gap: 12px;
+}
+
+.loot-table-formula{
+	width: 100%;
+
+}
+
+.settings-header-container{
+	display: flex;
+	justify-content: flex-start;
+
+	flex-flow: column;
+	flex-grow: inherit;
+}
+
+.loot-table-dropdown-settings{
+
+}
+
+body{
+	color: green;
+}

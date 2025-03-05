@@ -18,7 +18,6 @@ import {
 } from "../api/api";
 
 // import { type DiceIcon, IconManager } from "./view.icons";
-
 // import { StackRoller } from "src/rollers/dice/stack";
 // import { ExpectedValue } from "../types/api";
 // import { nanoid } from "nanoid";
@@ -43,6 +42,9 @@ export default class LootTableView extends ItemView {
 	rollButton: ButtonComponent;
 	saveButton: ExtraButtonComponent;
 	resultsTextBoxEl: HTMLDivElement;
+	formulaComponent: TextAreaComponent;
+	formulaEl: HTMLDivElement;
+
 	// stack: StackRoller;
 	// gridEl: HTMLDivElement;
 	// get customFormulas() {
@@ -52,8 +54,6 @@ export default class LootTableView extends ItemView {
 	// #adv = false;
 	// #dis = false;
 	// #add = 0;
-
-	formulaComponent: TextAreaComponent;
 
 
 	// #icons = IconManager;
@@ -104,24 +104,13 @@ export default class LootTableView extends ItemView {
 		// 	this.addResult(result, false);
 		// }
 
-		// this.buildButtons();
-		this.buildSettings();
-		this.buildResults();
-	}
-
-	buildSettings() {
-
 		// add header:
 		const settingsHeaderEl = this.contentEl.createDiv("settings-header-container");
 		settingsHeaderEl.createEl("h1", { cls: "settings-header", text: "Settings:" });
 
-		const resultsEl = settingsHeaderEl.createDiv("settings-text");
-		this.resultEl = resultsEl.createDiv("settings-text");
-		this.noResultsEl = this.resultEl.createSpan({
-			text: "Text..."
-		});
-
-		const itemTypeDropdown = new DropdownComponent(settingsHeaderEl)
+		// add item type dropdown:
+		const dropdownSettingsHeaderEl = settingsHeaderEl.createDiv("loot-table-dropdown-settings");
+		const itemTypeDropdown = new DropdownComponent(dropdownSettingsHeaderEl)
 			.addOption("All", "all")
 			.addOption("Cloaks", "cloaks")
 			.addOption("Gloves", "gloves")
@@ -130,52 +119,61 @@ export default class LootTableView extends ItemView {
 			.addOption("Rings", "rings")
 			.addOption("Shields", "shields")
 			.addOption("Swords", "swords")
-			.addOption("Wands", "wands");
-	}
+			.addOption("Wands", "wands")
+			.then((textArea) => {
+				textArea.selectEl.style.width = "100%";
+				textArea.selectEl.style.resize = "none";
+			});
 
-	buildResults() {
+
 
 		// add header:
-		const resultsHeaderEl = this.contentEl.createDiv("results-header-container");
+		const resultsHeaderEl = this.contentEl.createDiv("loot-table-results-header");
 		resultsHeaderEl.createEl("h1", { cls: "results-header", text: "Results:" });
 
 		// create div for results containing a text box:
-		this.resultsTextBoxEl = resultsHeaderEl.createDiv("loot-table-formula");
+		this.resultsTextBoxEl = this.contentEl.createDiv("loot-table-formula");
 		this.resultsTextBoxEl.empty();
 		this.formulaComponent = new TextAreaComponent(this.resultsTextBoxEl)
 			.setPlaceholder("This chest must have been a mimic! Try another!")
+			.then((textArea) => {
+				textArea.inputEl.style.width = "100%";
+				textArea.inputEl.rows = 6;
+				textArea.inputEl.style.resize = "none";
+			})
 
 		// create div for buttons:
 		const buttons = this.resultsTextBoxEl.createDiv("action-buttons");
+		const buttonsleft = buttons.createDiv("action-buttons-left");
+		const buttonsright = buttons.createDiv("action-buttons-right");
 
 		// create roll loot button:
-		this.rollButton = new ButtonComponent(buttons)
+		this.rollButton = new ButtonComponent(buttonsleft)
 			.setIcon(DICE)
 			.setCta()
 			.setTooltip("Roll Loot")
-		.onClick(() => this.roll());
-		this.rollButton.buttonEl.addClass("loot-roller-roll");
-
-		// create save loot button:
-		this.saveButton = new ExtraButtonComponent(buttons)
-			.setIcon(SAVE)
-			.setTooltip("Save Loot")
-			/*.onClick(() => this.save())*/;
-		this.saveButton.extraSettingsEl.addClass("loot-roller-roll");
+			.onClick(() => this.roll());
+		this.rollButton.buttonEl.addClass("loot-table-roll");
 
 		// add clear button inside:
-		new ExtraButtonComponent(resultsHeaderEl.createDiv("clear-all"))
+		new ExtraButtonComponent(buttonsright)
 			.setIcon(REMOVE)
 			.setTooltip("Clear All")
 			.onClick(async () => {
 					this.resultEl.empty();
 					this.resultEl.append(this.noResultsEl);
-					/*this.plugin.data.viewResults = [];
-					await this.plugin.saveSettings();*/
+					/*this.plugin.data.viewResults = [];*/
+					await this.plugin.saveSettings();
 				}
-		);
+			);
+		this.rollButton.buttonEl.addClass("loot-table-clear");
 
-		/*.onChange((v) => (this.#formula = new Map()));*/
+		// create save loot button:
+		this.saveButton = new ExtraButtonComponent(buttonsright)
+			.setIcon(SAVE)
+			.setTooltip("Save Loot")
+		/*.onClick(() => this.save())*/;
+		this.saveButton.extraSettingsEl.addClass("loot-table-save");
 	}
 
 	async roll(/*formula = this.formulaComponent.inputEl.value*/) {
