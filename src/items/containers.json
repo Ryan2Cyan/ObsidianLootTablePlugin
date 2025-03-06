@@ -1,0 +1,256 @@
+{
+	"containers": [
+		{
+			"id": "random",
+			"displayName": "Random"
+		},
+		{
+			"id": "apprentices-pack",
+			"displayName": "Apprentices Pack"
+		},
+		{
+			"id": "backpack",
+			"displayName": "Backpack"
+		},
+		{
+			"id": "bewildering-adventurers-pack",
+			"displayName": "Bewildering Adventurers Pack"
+		},
+		{
+			"id": "bucket-of-fish",
+			"displayName": "Bucket Of Fish"
+		},
+		{
+			"id": "burlap-sack",
+			"displayName": "Burlap Sack"
+		},
+		{
+			"id": "heavy-backpack",
+			"displayName": "Heavy Backpack"
+		},
+		{
+			"id": "old-backpack",
+			"displayName": "Old Backpack"
+		},
+		{
+			"id": "patched-together-sack",
+			"displayName": "Patched Together Sack"
+		},
+		{
+			"id": "pickpockets-bag",
+			"displayName": "Pickpockets Bag"
+		},
+		{
+			"id": "pouch",
+			"displayName": "Pouch"
+		},
+		{
+			"id": "adamantine-chest",
+			"displayName": "Adamantine Chest"
+		},
+		{
+			"id": "caravan-strongbox",
+			"displayName": "Caravan Strongbox"
+		},
+		{
+			"id": "cartilaginous-chest",
+			"displayName": "Cartilaginous Chest"
+		},
+		{
+			"id": "crude-chest",
+			"displayName": "Crude Chest"
+		},
+		{
+			"id": "elaborate-reliquary",
+			"displayName": "Elaborate Reliquary"
+		},
+		{
+			"id": "elegant-chest",
+			"displayName": "Elegant Chest"
+		},
+		{
+			"id": "gilded-chest",
+			"displayName": "Gilded Chest"
+		},
+		{
+			"id": "grimy-chest",
+			"displayName": "Grimy Chest"
+		},
+		{
+			"id": "heavy-chest",
+			"displayName": "Heavy Chest"
+		},
+		{
+			"id": "moss-covered-chest",
+			"displayName": "Moss Covered Chest"
+		},
+		{
+			"id": "opulent-chest",
+			"displayName": "Opulent Chest"
+		},
+		{
+			"id": "ornate-chest",
+			"displayName": "Ornate Chest"
+		},
+		{
+			"id": "painted-chest",
+			"displayName": "Painted Chest"
+		},
+		{
+			"id": "rustic-chest",
+			"displayName": "Rustic Chest"
+		},
+		{
+			"id": "shiny-chest",
+			"displayName": "Shiny Chest"
+		},
+		{
+			"id": "storage-chest",
+			"displayName": "Storage Chest"
+		},
+		{
+			"id": "wicker-chest",
+			"displayName": "Wicker Chest"
+		},
+		{
+			"id": "wooden-chest",
+			"displayName": "Wooden Chest"
+		},
+		{
+			"id": "decorated-barrel",
+			"displayName": "Decorated Barrel"
+		},
+		{
+			"id": "ribcage",
+			"displayName": "Ribcage"
+		},
+		{
+			"id": "wooden-barrel",
+			"displayName": "Wooden Barrel"
+		},
+		{
+			"id": "wooden-crate",
+			"displayName": "Wooden Crate"
+		},
+		{
+			"id": "wooden-trunk",
+			"displayName": "Wooden Trunk"
+		},
+		{
+			"id": "adventurers-chest",
+			"displayName": "Adventurers Chest"
+		},
+		{
+			"id": "bottle-rack",
+			"displayName": "Bottle Rack"
+		},
+		{
+			"id": "damaged-vase",
+			"displayName": "Damaged Vase"
+		},
+		{
+			"id": "fish-barrel",
+			"displayName": "Fish Barrel"
+		},
+		{
+			"id": "loose-plank",
+			"displayName": "Loose Plank"
+		},
+		{
+			"id": "looters-trunk",
+			"displayName": "Looters Trunk"
+		},
+		{
+			"id": "pile-of-books",
+			"displayName": "Pile Of Books"
+		},
+		{
+			"id": "rosewood-desk",
+			"displayName": "Rosewood Desk"
+		},
+		{
+			"id": "row-of-books",
+			"displayName": "Row Of Books"
+		},
+		{
+			"id": "shabby-wardrobe",
+			"displayName": "Shabby Wardrobe"
+		},
+		{
+			"id": "shelves",
+			"displayName": "Shelves"
+		},
+		{
+			"id": "stack-of-books",
+			"displayName": "Stack Of Books"
+		},
+		{
+			"id": "storage-box",
+			"displayName": "Storage Box"
+		},
+		{
+			"id": "table",
+			"displayName": "Table"
+		},
+		{
+			"id": "travellers-chest",
+			"displayName": "Travellers Chest"
+		},
+		{
+			"id": "watertight-chest",
+			"displayName": "Watertight Chest"
+		},
+		{
+			"id": "wooden-desk",
+			"displayName": "Wooden Desk"
+		},
+		{
+			"id": "wooden-shelf",
+			"displayName": "Wooden Shelf"
+		},
+		{
+			"id": "vase",
+			"displayName": "Vase"
+		},
+		{
+			"id": "animal-carcass",
+			"displayName": "Animal Carcass"
+		},
+		{
+			"id": "bag-of-moulding",
+			"displayName": "Bag Of Moulding"
+		},
+		{
+			"id": "curious-book",
+			"displayName": "Curious Book"
+		},
+		{
+			"id": "chest-of-the-mundane",
+			"displayName": "Chest Of The Mundane"
+		},
+		{
+			"id": "feast-supplies",
+			"displayName": "Feast Supplies"
+		},
+		{
+			"id": "hand-bag",
+			"displayName": "Hand Bag"
+		},
+		{
+			"id": "stuffed-bear",
+			"displayName": "Stuffed Bear"
+		},
+		{
+			"id": "alchemy-pouch",
+			"displayName": "Alchemy Pouch"
+		},
+		{
+			"id": "camp-supply-pack",
+			"displayName": "Camp Supply Pack"
+		},
+		{
+			"id": "keychain",
+			"displayName": "Keychain"
+		}
+	]
+}

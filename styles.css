@@ -102,6 +102,20 @@ h1 {
 	margin-left: 12px;
 }
 
+.loot-table-container-toggle{
+	display: flex;
+	/*flex-grow: inherit;*/
+	align-items: center;
+	gap: 12px;
+}
+
+.loot-table-container-dropdown{
+	display: flex;
+	/*flex-grow: inherit;*/
+	align-items: center;
+	gap: 12px;
+}
+
 .action-buttons{
 	display: flex;
 	flex-flow: row wrap;
@@ -116,9 +130,7 @@ h1 {
 .settings-header-container{
 	display: flex;
 	justify-content: flex-start;
-
 	flex-flow: column;
-	flex-grow: inherit;
 }
 
 .loot-table-dropdown-settings{

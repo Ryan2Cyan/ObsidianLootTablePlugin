@@ -1,4 +1,47 @@
 {
-	"wizard": ["Sword", "Axe", "Bow"],
-	"armors": ["Plate Armor", "Chainmail", "Leather Armor"]
+
+	"items": [
+		{
+			"name": "Sword",
+			"category": "Weapon",
+			"rarity": "Common",
+			"usableBy": ["Warrior", "Paladin", "Knight"],
+			"price": 50
+		},
+		{
+			"name": "Axe",
+			"category": "Weapon",
+			"rarity": "Uncommon",
+			"usableBy": ["Warrior", "Barbarian", "Ranger"],
+			"price": 75
+		},
+		{
+			"name": "Bow",
+			"category": "Weapon",
+			"rarity": "Rare",
+			"usableBy": ["Ranger", "Hunter"],
+			"price": 150
+		},
+		{
+			"name": "Plate Armor",
+			"category": "Armor",
+			"rarity": "Rare",
+			"usableBy": ["Warrior", "Paladin", "Knight"],
+			"price": 300
+		},
+		{
+			"name": "Chainmail",
+			"category": "Armor",
+			"rarity": "Uncommon",
+			"usableBy": ["Warrior", "Ranger", "Paladin"],
+			"price": 200
+		},
+		{
+			"name": "Leather Armor",
+			"category": "Armor",
+			"rarity": "Common",
+			"usableBy": ["Ranger", "Thief", "Hunter"],
+			"price": 100
+		}
+	]
 }

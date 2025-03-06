@@ -1,21 +1,18 @@
 import {
 	ButtonComponent,
+	DropdownComponent,
 	ExtraButtonComponent,
 	ItemView,
 	TextAreaComponent,
-	DropdownComponent,
+	ToggleComponent,
 	WorkspaceLeaf
 } from "obsidian";
 
 import type LootTablePlugin from "src/main";
 
-import {
-	BASE, DICE, REMOVE, SAVE
-} from "src/utils/icons";
+import {BASE, DICE, REMOVE, SAVE} from "src/utils/icons";
 
-import {
-	API, ItemType
-} from "../api/api";
+import {API, ContainerType} from "../api/api";
 
 // import { type DiceIcon, IconManager } from "./view.icons";
 // import { StackRoller } from "src/rollers/dice/stack";
@@ -42,8 +39,17 @@ export default class LootTableView extends ItemView {
 	rollButton: ButtonComponent;
 	saveButton: ExtraButtonComponent;
 	resultsTextBoxEl: HTMLDivElement;
-	formulaComponent: TextAreaComponent;
+	lootResultsTextComponent: TextAreaComponent;
 	formulaEl: HTMLDivElement;
+
+	containerToggleDiv : HTMLDivElement;
+	containerDropdownDiv : HTMLDivElement;
+	containerToggleComponent: ToggleComponent;
+	containerDropDownComponent: ToggleComponent;
+	selectedContainerType: ContainerType;
+	containerActive: boolean;
+
+	// sliderComponent: SliderComponent;
 
 	// stack: StackRoller;
 	// gridEl: HTMLDivElement;
@@ -91,6 +97,9 @@ export default class LootTableView extends ItemView {
 	// called when the view is open. triggers 'display()' method:
 	async onOpen() {
 
+		this.selectedContainerType = ContainerType.RANDOM;
+		this.containerActive = false;
+
 		// build UI components:
 		this.display();
 	}
@@ -104,26 +113,7 @@ export default class LootTableView extends ItemView {
 		// 	this.addResult(result, false);
 		// }
 
-		// add header:
-		const settingsHeaderEl = this.contentEl.createDiv("settings-header-container");
-		settingsHeaderEl.createEl("h1", { cls: "settings-header", text: "Settings:" });
-
-		// add item type dropdown:
-		const dropdownSettingsHeaderEl = settingsHeaderEl.createDiv("loot-table-dropdown-settings");
-		const itemTypeDropdown = new DropdownComponent(dropdownSettingsHeaderEl)
-			.addOption("All", "all")
-			.addOption("Cloaks", "cloaks")
-			.addOption("Gloves", "gloves")
-			.addOption("Helmets", "helmets")
-			.addOption("Pants", "pants")
-			.addOption("Rings", "rings")
-			.addOption("Shields", "shields")
-			.addOption("Swords", "swords")
-			.addOption("Wands", "wands")
-			.then((textArea) => {
-				textArea.selectEl.style.width = "100%";
-				textArea.selectEl.style.resize = "none";
-			});
+		this.buildSettings();
 
 
 
@@ -134,7 +124,7 @@ export default class LootTableView extends ItemView {
 		// create div for results containing a text box:
 		this.resultsTextBoxEl = this.contentEl.createDiv("loot-table-formula");
 		this.resultsTextBoxEl.empty();
-		this.formulaComponent = new TextAreaComponent(this.resultsTextBoxEl)
+		this.lootResultsTextComponent = new TextAreaComponent(this.resultsTextBoxEl)
 			.setPlaceholder("This chest must have been a mimic! Try another!")
 			.then((textArea) => {
 				textArea.inputEl.style.width = "100%";
@@ -176,6 +166,57 @@ export default class LootTableView extends ItemView {
 		this.saveButton.extraSettingsEl.addClass("loot-table-save");
 	}
 
+	buildSettings(){
+
+		// settings header:
+		const settingsHeaderEl = this.contentEl.createDiv("settings-header-container");
+		settingsHeaderEl.createEl("h1", { cls: "settings-header", text: "Settings:" });
+
+		this.buildContainerToggle(settingsHeaderEl);
+	}
+
+	buildContainerToggle(settingsHeaderEl : HTMLDivElement){
+
+		// container settings header:
+		const containerHeaderEl = settingsHeaderEl.createDiv("loot-table-container-header");
+		containerHeaderEl.createEl("h4", { cls: "settings-header", text: "Container:" });
+
+		// add container toggle:
+		this.containerToggleDiv = settingsHeaderEl.createDiv("loot-table-container-toggle");
+		const containerTextEl = this.containerToggleDiv.createDiv("loot-table-container-text");
+		containerTextEl.createEl("p", { cls: "settings-header", text: "Include Container:" });
+		this.containerDropDownComponent = new ToggleComponent(this.containerToggleDiv)
+			.setTooltip("Add Container into Loot Table.")
+			.setValue(this.plugin.data.addToView)
+			.onChange(async (value) => {
+				this.containerActive = value;
+		});
+
+		// add container dropdown:
+		this.containerDropdownDiv = settingsHeaderEl.createDiv("loot-table-container-dropdown");
+		const containerDropdownTextEl = this.containerDropdownDiv.createDiv("loot-table-container-dropdown-text");
+		containerDropdownTextEl.createEl("p", { cls: "settings-header", text: "Container Type:" });
+		const containerTypeDropdown = new DropdownComponent(this.containerDropdownDiv)
+			.onChange((selectedValue) => {
+
+				// Retrieve the corresponding ContainerType enum from the selectedValue
+				this.selectedContainerType = ContainerType[selectedValue as keyof typeof ContainerType];
+				console.log("Selected ContainerType:", this.selectedContainerType);
+
+			})
+			.then((textArea) => {
+				textArea.selectEl.style.width = "100%";
+				textArea.selectEl.style.resize = "none";
+			});
+
+		for (const key in ContainerType){
+			if(Object.prototype.hasOwnProperty.call(ContainerType, key)){
+				containerTypeDropdown.addOption(key, ContainerType[key as keyof typeof ContainerType]);
+			}
+		}
+
+	}
+
 	async roll(/*formula = this.formulaComponent.inputEl.value*/) {
 
 		// // return if there is no passed in string:
@@ -186,9 +227,21 @@ export default class LootTableView extends ItemView {
 		// // disable the roll button to prevent multiple rolls simultaneously:
 		// this.rollButton.setDisabled(true);
 
-		const generatedItem =  API.getRandomValueFromJSON(ItemType.CLOAKS, "wizard");
-		if(generatedItem != null) console.log(generatedItem);
-		this.formulaComponent.setValue(generatedItem ?? "");
+		console.log(API.getContainer(this.selectedContainerType));
+		let Result = "";
+
+		// append container data:
+		if(this.containerActive) {
+
+			const container = API.getContainer(this.selectedContainerType);
+			if (!container) {
+				console.warn("Container not found for ID:", this.selectedContainerType);
+			} else {
+				Result += "Container: " + container + "\n";
+			}
+		}
+
+		this.lootResultsTextComponent.setValue(Result);
 
 		// const opts = {
 		// 	...API.getRollerOptions(this.plugin.data)

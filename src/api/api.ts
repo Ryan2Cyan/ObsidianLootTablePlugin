@@ -60,6 +60,72 @@ export enum ItemType {
 	CLOAKS = "cloaks"
 }
 
+export enum ContainerType {
+	RANDOM = "random",
+	APPRENTICES_PACK = "apprentices-pack",
+	BACKPACK = "backpack",
+	BEWILDERING_ADVENTURERS_PACK = "bewildering-adventurers-pack",
+	BUCKET_OF_FISH = "bucket-of-fish",
+	BURLAP_SACK = "burlap-sack",
+	HEAVY_BACKPACK = "heavy-backpack",
+	OLD_BACKPACK = "old-backpack",
+	PATCHED_TOGETHER_SACK = "patched-together-sack",
+	PICKPOCKETS_BAG = "pickpockets-bag",
+	POUCH = "pouch",
+	ADAMANTINE_CHEST = "adamantine-chest",
+	CARAVAN_STRONGBOX = "caravan-strongbox",
+	CARTILAGINOUS_CHEST = "cartilaginous-chest",
+	CRUDE_CHEST = "crude-chest",
+	ELABORATE_RELIQUARY = "elaborate-reliquary",
+	ELEGANT_CHEST = "elegant-chest",
+	GILDED_CHEST = "gilded-chest",
+	GRIMY_CHEST = "grimy-chest",
+	HEAVY_CHEST = "heavy-chest",
+	MOSS_COVERED_CHEST = "moss-covered-chest",
+	OPULENT_CHEST = "opulent-chest",
+	ORNATE_CHEST = "ornate-chest",
+	PAINTED_CHEST = "painted-chest",
+	RUSTIC_CHEST = "rustic-chest",
+	SHINY_CHEST = "shiny-chest",
+	STORAGE_CHEST = "storage-chest",
+	WICKER_CHEST = "wicker-chest",
+	WOODEN_CHEST = "wooden-chest",
+	DECORATED_BARREL = "decorated-barrel",
+	RIBCAGE = "ribcage",
+	WOODEN_BARREL = "wooden-barrel",
+	WOODEN_CRATE = "wooden-crate",
+	WOODEN_TRUNK = "wooden-trunk",
+	ADVENTURERS_CHEST = "adventurers-chest",
+	BOTTLE_RACK = "bottle-rack",
+	DAMAGED_VASE = "damaged-vase",
+	FISH_BARREL = "fish-barrel",
+	LOOSE_PLANK = "loose-plank",
+	LOOTERS_TRUNK = "looters-trunk",
+	PILE_OF_BOOKS = "pile-of-books",
+	ROSEWOOD_DESK = "rosewood-desk",
+	ROW_OF_BOOKS = "row-of-books",
+	SHABBY_WARDROBE = "shabby-wardrobe",
+	SHELVES = "shelves",
+	STACK_OF_BOOKS = "stack-of-books",
+	STORAGE_BOX = "storage-box",
+	TABLE = "table",
+	TRAVELLERS_CHEST = "travellers-chest",
+	WATERTIGHT_CHEST = "watertight-chest",
+	WOODEN_DESK = "wooden-desk",
+	WOODEN_SHELF = "wooden-shelf",
+	VASE = "vase",
+	ANIMAL_CARCASS = "animal-carcass",
+	BAG_OF_MOULDING = "bag-of-moulding",
+	CURIOUS_BOOK = "curious-book",
+	CHEST_OF_THE_MUNDANE = "chest-of-the-mundane",
+	FEAST_SUPPLIES = "feast-supplies",
+	HAND_BAG = "hand-bag",
+	STUFFED_BEAR = "stuffed-bear",
+	ALCHEMY_POUCH = "alchemy-pouch",
+	CAMP_SUPPLY_PACK = "camp-supply-pack",
+	KEYCHAIN = "keychain"
+}
+
 // declare module "obsidian" {
 // 	interface Workspace {
 // 		on(
@@ -86,6 +152,7 @@ export enum ItemType {
 
 class APIInstance {
 	app: App;
+
 	/*data: LootTableSettings;*/
 
 	initialize(/*data: LootTableSettings,*/ app: App) {
@@ -93,28 +160,61 @@ class APIInstance {
 		this.app = app;
 	}
 
-	getRandomValueFromJSON(itemType: ItemType, category: string): string | null {
+	getContainer(containerType: ContainerType): string {
+
+		// load all containers from the parsed .json:
+		const containerData = this.getValueFromJSON("containers");
+		if (!containerData || !containerData.containers) {
+			return "Error: Invalid container data.";
+		}
+		const containers = containerData.containers;
+
+		// if random, choose a container randomly:
+		if(containerType === ContainerType.RANDOM) {
+			const randomIndex = Math.floor(Math.random() * containerData.containers.length);
+			return containers[randomIndex].displayName;
+		}
+
+		// find the selected container by type:
+		for (const container of containers) {
+			if (container.id === containerType.valueOf()) {
+				return container.displayName;
+			}
+		}
+		return "Cannot find container with type: " + containerType + ".";
+	}
+
+getValueFromJSON(fileExtension: string): any | null {
 
 		if (this.app.vault.adapter instanceof FileSystemAdapter) { // true if desktop
 
 			// get the .json file path for the specified item type:
-			const filePath = this.app.vault.adapter.getBasePath() + "\\.obsidian\\plugins\\ObsidianLootTablePlugin\\src\\items\\" + itemType + ".json";
+			const filePath = this.app.vault.adapter.getBasePath() +
+				"\\.obsidian\\plugins\\ObsidianLootTablePlugin\\src\\items\\" + fileExtension + ".json";
 
 			try {
-				// Read the JSON file and parse it
+
+				// read the JSON file and parse it
 				const data = fs.readFileSync(filePath, 'utf-8');
 				const json = JSON.parse(data);
 
-				// Ensure the category exists in the JSON
-				if (!json[category] || !Array.isArray(json[category])) {
-					console.error(`Category "${category}" does not exist or is not an array in the JSON file.`);
-					return null;
-				}
-
-				// Get a random value from the specified category
-				const items = json[category];
-				const randomIndex = Math.floor(Math.random() * items.length);
-				return items[randomIndex];
+				return json;
+				// // ensure the category exists in the JSON
+				// if (!json[category] || !Array.isArray(json[category])) {
+				// 	console.error(`Category "${category}" does not exist or is not an array in the JSON file.`);
+				// 	return null;
+				// }
+				// const items = json[category];
+				//
+				// console.log(items);
+				// // Get a random value from the specified category
+				// const randomIndex = Math.floor(Math.random() * items.length);
+				// const randomItem = items[randomIndex];
+				// console.log(randomItem);
+				//
+				//
+				// // const valueFromItem = items[randomIndex][subcategory];
+				// return randomItem;
 
 			} catch (error) {
 				console.error('Error reading or parsing JSON file:', error);
