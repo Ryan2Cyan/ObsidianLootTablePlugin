@@ -2,255 +2,506 @@
 	"containers": [
 		{
 			"id": "random",
-			"displayName": "Random"
+			"displayName": "Random",
+			"gold": 0,
+			"weight": 0.0,
+			"description": "A container with random items."
 		},
 		{
 			"id": "apprentices-pack",
-			"displayName": "Apprentices Pack"
+			"displayName": "Apprentices Pack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "This moth-eaten backpack is sticky with cobwebs."
 		},
 		{
 			"id": "backpack",
-			"displayName": "Backpack"
+			"displayName": "Backpack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "A simple canvas bag, perfect for carrying almost anything."
 		},
 		{
 			"id": "bewildering-adventurers-pack",
-			"displayName": "Bewildering Adventurers Pack"
+			"displayName": "Bewildering Adventurers Pack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "The lip of the pack is stitched with the likeness of a helmeted warrior, their eyes sheltered. Something protrudes from the helm, like a strange, floppy arrow."
 		},
 		{
 			"id": "bucket-of-fish",
-			"displayName": "Bucket Of Fish"
+			"displayName": "Bucket Of Fish",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.2,
+			"description": "The day's catch. The smell suggests it's starting to go off."
 		},
 		{
 			"id": "burlap-sack",
-			"displayName": "Burlap Sack"
+			"displayName": "Burlap Sack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.2,
+			"description": "A simple bag fashioned from a single piece of rough burlap."
 		},
 		{
 			"id": "heavy-backpack",
-			"displayName": "Heavy Backpack"
+			"displayName": "Heavy Backpack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1,
+			"description": "A durable backpack, made for someone of small stature. Acrid black powder stains the canvas, and one of the leather straps in badly singed."
 		},
 		{
 			"id": "old-backpack",
-			"displayName": "Old Backpack"
+			"displayName": "Old Backpack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "A threadbare backpack, filled inside and out with cobwebs."
 		},
 		{
 			"id": "patched-together-sack",
-			"displayName": "Patched Together Sack"
+			"displayName": "Patched Together Sack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "This threadbare bag is patched in multiple places with a diverse array of worn-down fabrics and threads."
 		},
 		{
 			"id": "pickpockets-bag",
-			"displayName": "Pickpockets Bag"
+			"displayName": "Pickpockets Bag",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 1.0,
+			"description": "A warning is embroidered in shaky letters on the inside flap - 'HANDS OFF'."
 		},
 		{
 			"id": "pouch",
-			"displayName": "Pouch"
+			"displayName": "Pouch",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.2,
+			"description": "A plain leather bag, cinched at the top with knotted cord."
 		},
 		{
 			"id": "adamantine-chest",
-			"displayName": "Adamantine Chest"
+			"displayName": "Adamantine Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 50.0,
+			"description": "Made of precious stone and covered in gold, this chest is both sturdy and pleasing to the eye."
 		},
 		{
 			"id": "caravan-strongbox",
-			"displayName": "Caravan Strongbox"
+			"displayName": "Caravan Strongbox",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "A bloody handprint, still sticky to the touch, wraps around the iron handle of this heavy oak box, kept closed by a large iron lock."
 		},
 		{
 			"id": "cartilaginous-chest",
-			"displayName": "Cartilaginous Chest"
+			"displayName": "Cartilaginous Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "The flesh-like lid of this rubbery container seems to quiver when touched."
 		},
 		{
 			"id": "crude-chest",
-			"displayName": "Crude Chest"
+			"displayName": "Crude Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "This chest of animal skins and bones is held together by mud-covered straps."
 		},
 		{
 			"id": "elaborate-reliquary",
-			"displayName": "Elaborate Reliquary"
+			"displayName": "Elaborate Reliquary",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Made of precious stone and covered in gold, this chest is both sturdy and pleasing to the eye."
 		},
 		{
 			"id": "elegant-chest",
-			"displayName": "Elegant Chest"
+			"displayName": "Elegant Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "An elaborate chest made from strange metals and wood you've never seen before."
 		},
 		{
 			"id": "gilded-chest",
-			"displayName": "Gilded Chest"
+			"displayName": "Gilded Chest",
+			"rarity": "common",
+			"gold": 25,
+			"weight": 5.0,
+			"description": "Made of precious stone and covered in gold, this chest is both sturdy and pleasing to the eye."
 		},
 		{
 			"id": "grimy-chest",
-			"displayName": "Grimy Chest"
+			"displayName": "Grimy Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Simply constructed and weatherworn, but it seems sturdy enough."
 		},
 		{
 			"id": "heavy-chest",
-			"displayName": "Heavy Chest"
+			"displayName": "Heavy Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 50.0,
+			"description": "This chest's fire-hardened wood and thick iron reinforcements offer exceptional protection for any valuables - or secrets."
 		},
 		{
 			"id": "moss-covered-chest",
-			"displayName": "Moss Covered Chest"
+			"displayName": "Moss Covered Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Though most of the wood is covered with green moss, this chest is still remarkably sturdy."
 		},
 		{
 			"id": "opulent-chest",
-			"displayName": "Opulent Chest"
+			"displayName": "Opulent Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "This exquisitely-crafted chest, ornamented with gems and lined with cushioned velvet, is fit for storing the finest treasures."
 		},
 		{
 			"id": "ornate-chest",
-			"displayName": "Ornate Chest"
+			"displayName": "Ornate Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "Every inch of this small chest is decorated with iron clasps."
 		},
 		{
 			"id": "painted-chest",
-			"displayName": "Painted Chest"
+			"displayName": "Painted Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Livelier than your typical chest of wood and metal, thanks to a thick coat of paint."
 		},
 		{
 			"id": "rustic-chest",
-			"displayName": "Rustic Chest"
+			"displayName": "Rustic Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Though simple and weatherworn, this chest seems sturdy enough."
 		},
 		{
 			"id": "shiny-chest",
-			"displayName": "Shiny Chest"
+			"displayName": "Shiny Chest",
+			"rarity": "common",
+			"gold": 20,
+			"weight": 5.0,
+			"description": "This chest's brass and silver inlays still gleam beneath a coating of rain-speckled grime."
 		},
 		{
 			"id": "storage-chest",
-			"displayName": "Storage Chest"
+			"displayName": "Storage Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 50.0,
+			"description": "Made from fire-hardened wood and iron, this heavy chest protects its contents from both the elements and thieves."
 		},
 		{
 			"id": "wicker-chest",
-			"displayName": "Wicker Chest"
+			"displayName": "Wicker Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 2.5,
+			"description": "Far from impregnable, but roomy and lightweight."
 		},
 		{
 			"id": "wooden-chest",
-			"displayName": "Wooden Chest"
+			"displayName": "Wooden Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "A common chest of timber and iron."
 		},
 		{
 			"id": "decorated-barrel",
-			"displayName": "Decorated Barrel"
+			"displayName": "Decorated Barrel",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "What could have been a simple barrel is covered in silver filigree and encrusted with gems of all sizes, as if the maker had more time than sense."
 		},
 		{
 			"id": "ribcage",
-			"displayName": "Ribcage"
+			"displayName": "Ribcage",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.1,
+			"description": "Fastidiously separated from the rest of the skeleton and cleaned of flesh and organs."
 		},
 		{
 			"id": "wooden-barrel",
-			"displayName": "Wooden Barrel"
+			"displayName": "Wooden Barrel",
+			"rarity": "common",
+			"gold": 12,
+			"weight": 15.0,
+			"description": "A basic wooden barrel for storing liquids or other goods."
 		},
 		{
 			"id": "wooden-crate",
-			"displayName": "Wooden Crate"
+			"displayName": "Wooden Crate",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "Sturdy enough to endure rocky voyages or decades stacked ten-deep in a dusty warehouse."
 		},
 		{
 			"id": "wooden-trunk",
-			"displayName": "Wooden Trunk"
+			"displayName": "Wooden Trunk",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "Built to accommodate items too large for a standard crate."
 		},
 		{
 			"id": "adventurers-chest",
-			"displayName": "Adventurers Chest"
+			"displayName": "Adventurers Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "A heavy traveller's chest pockmarked with arrow strikes."
 		},
 		{
 			"id": "bottle-rack",
-			"displayName": "Bottle Rack"
+			"displayName": "Bottle Rack",
+			"rarity": "common",
+			"gold": 0,
+			"weight": 2.0,
+			"description": "A small collection of various tinctures and tonics."
 		},
 		{
 			"id": "damaged-vase",
-			"displayName": "Damaged Vase"
+			"displayName": "Damaged Vase",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 2.0,
+			"description": "This once-fine vase has been cracked by either time or neglect."
 		},
 		{
 			"id": "fish-barrel",
-			"displayName": "Fish Barrel"
+			"displayName": "Fish Barrel",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 18.2,
+			"description": "A fisher's cask of some age. The wood itself emits a powerful briny smell."
 		},
 		{
 			"id": "loose-plank",
-			"displayName": "Loose Plank"
+			"displayName": "Loose Plank",
+			"rarity": "common",
+			"gold": 0,
+			"weight": 0,
+			"description": "This plank stands out as dislodged from the others."
 		},
 		{
 			"id": "looters-trunk",
-			"displayName": "Looters Trunk"
+			"displayName": "Looters Trunk",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 15.0,
+			"description": "Dusty fingerprints mottle the exterior of this worn traveller's trunk."
 		},
 		{
 			"id": "pile-of-books",
-			"displayName": "Pile Of Books"
+			"displayName": "Pile Of Books",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 3.0,
+			"description": "Precariously stacked tomes of varied thickness, each dustier than the one beneath."
 		},
 		{
 			"id": "rosewood-desk",
-			"displayName": "Rosewood Desk"
+			"displayName": "Rosewood Desk",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "Upon this desk ink pots and quills are neatly placed, likely the instruments of a prolific writer."
 		},
 		{
 			"id": "row-of-books",
-			"displayName": "Row Of Books"
+			"displayName": "Row Of Books",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 3.0,
+			"description": "Books on various unrelated subjects, organised in no obvious order."
 		},
 		{
 			"id": "shabby-wardrobe",
-			"displayName": "Shabby Wardrobe"
+			"displayName": "Shabby Wardrobe",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 55.0,
+			"description": "An assortment of unrelated objects line each shelf, following no clear rhyme or rhythm."
 		},
 		{
 			"id": "shelves",
-			"displayName": "Shelves"
+			"displayName": "Shelves",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 12.5,
+			"description": "Speckles of dust peak at you from behind disorganised objects."
 		},
 		{
 			"id": "stack-of-books",
-			"displayName": "Stack Of Books"
+			"displayName": "Stack Of Books",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 3.0,
+			"description": "Precariously stacked tomes of varied thickness, each dustier than the one beneath."
 		},
 		{
 			"id": "storage-box",
-			"displayName": "Storage Box"
+			"displayName": "Storage Box",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 10.0,
+			"description": "A chest suitable for lashing to carts and wagons."
 		},
 		{
 			"id": "table",
-			"displayName": "Table"
+			"displayName": "Table",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 21.0,
+			"description": "A simple wooden table, standing proudly on four legs."
 		},
 		{
 			"id": "travellers-chest",
-			"displayName": "Travellers Chest"
+			"displayName": "Travellers Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 12.0,
+			"description": "A chest suitable for lashing to carts wagons."
 		},
 		{
 			"id": "watertight-chest",
-			"displayName": "Watertight Chest"
+			"displayName": "Watertight Chest",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 13.0,
+			"description": "A tightly bolted chest, waterproofed with a coat of linseed oil."
 		},
 		{
 			"id": "wooden-desk",
-			"displayName": "Wooden Desk"
+			"displayName": "Wooden Desk",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 20.0,
+			"description": "A desk littered with an assortment of objects."
 		},
 		{
 			"id": "wooden-shelf",
-			"displayName": "Wooden Shelf"
+			"displayName": "Wooden Shelf",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 13.0,
+			"description": "As you meet the shelf at eye level, a small gathering of objects line to greet you."
 		},
 		{
 			"id": "vase",
-			"displayName": "Vase"
+			"displayName": "Vase",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 2.0,
+			"description": "Lovely, delicate, and quite old, judging by its dated design."
 		},
 		{
 			"id": "animal-carcass",
-			"displayName": "Animal Carcass"
+			"displayName": "Animal Carcass",
+			"rarity": "common",
+			"gold": 2,
+			"weight": 30.0,
+			"description": "Something seems lodged inside the carcass, getting past the stench may prove difficult."
 		},
 		{
 			"id": "bag-of-moulding",
-			"displayName": "Bag Of Moulding"
+			"displayName": "Bag Of Moulding",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.2,
+			"description": "All food that is put into this bag immediately grows mould and spoils."
 		},
 		{
 			"id": "curious-book",
-			"displayName": "Curious Book"
+			"displayName": "Curious Book",
+			"rarity": "common",
+			"gold": 14,
+			"weight": 0.5,
+			"description": "This book feels light in your hands. And strangely hollow."
 		},
 		{
 			"id": "chest-of-the-mundane",
-			"displayName": "Chest Of The Mundane"
+			"displayName": "Chest Of The Mundane",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 100.0,
+			"description": "Looking at this chest fills you with a suspiciously overwhelming feeling that there is absolutely nothing special about it."
 		},
 		{
 			"id": "feast-supplies",
-			"displayName": "Feast Supplies"
+			"displayName": "Feast Supplies",
+			"rarity": "common",
+			"gold": 22,
+			"weight": 2.5,
+			"description": "A delectable feast perfuming the air with the comfortable aromatic smell of herbs and spices."
 		},
 		{
 			"id": "hand-bag",
-			"displayName": "Hand Bag"
+			"displayName": "Hand Bag",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.2,
+			"description": "A bag of severed hands - wet with suspicious viscera."
 		},
 		{
 			"id": "stuffed-bear",
-			"displayName": "Stuffed Bear"
+			"displayName": "Stuffed Bear",
+			"rarity": "common",
+			"gold": 16,
+			"weight": 0.10,
+			"description": "A knitted toy bear stuffed with soft fur."
 		},
 		{
 			"id": "alchemy-pouch",
-			"displayName": "Alchemy Pouch"
+			"displayName": "Alchemy Pouch",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.1,
+			"description": "A patina of puce alchemical matter coats this pouch - hopefully not the former owner reduced to dust by their experiments."
 		},
 		{
 			"id": "camp-supply-pack",
-			"displayName": "Camp Supply Pack"
+			"displayName": "Camp Supply Pack",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.1,
+			"description": "Small compartments line the sack: a compass-sized furrow; a pocket packed with storing salts; and an area for stiff tent legs, fixing pegs, and folded canvas."
 		},
 		{
 			"id": "keychain",
-			"displayName": "Keychain"
+			"displayName": "Keychain",
+			"rarity": "common",
+			"gold": 1,
+			"weight": 0.1,
+			"description": "Though the keychain is lightly rusted from use, every new key that jangles on it is a mote of possibility - a frontier to explore."
 		}
 	]
 }

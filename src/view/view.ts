@@ -43,11 +43,27 @@ export default class LootTableView extends ItemView {
 	formulaEl: HTMLDivElement;
 
 	containerToggleDiv : HTMLDivElement;
-	containerDropdownDiv : HTMLDivElement;
 	containerToggleComponent: ToggleComponent;
-	containerDropDownComponent: ToggleComponent;
-	selectedContainerType: ContainerType;
 	containerActive: boolean;
+
+	containerDropdownDiv : HTMLDivElement;
+	selectedContainerType: ContainerType;
+
+	containerGoldToggleDiv : HTMLDivElement;
+	containerGoldToggleComponent: ToggleComponent;
+	containerGoldActive: boolean;
+
+	containerWeightToggleDiv : HTMLDivElement;
+	containerWeightToggleComponent: ToggleComponent;
+	containerWeightActive: boolean;
+
+	containerDescriptionToggleDiv : HTMLDivElement;
+	containerDescriptionToggleComponent: ToggleComponent;
+	containerDescriptionActive: boolean;
+
+	containerQuantityDiv : HTMLDivElement;
+	containerQuantityComponent: TextAreaComponent;
+	containerQuantityValue: string;
 
 	// sliderComponent: SliderComponent;
 
@@ -99,6 +115,7 @@ export default class LootTableView extends ItemView {
 
 		this.selectedContainerType = ContainerType.RANDOM;
 		this.containerActive = false;
+		this.containerQuantityValue = "1";
 
 		// build UI components:
 		this.display();
@@ -130,7 +147,8 @@ export default class LootTableView extends ItemView {
 				textArea.inputEl.style.width = "100%";
 				textArea.inputEl.rows = 6;
 				textArea.inputEl.style.resize = "none";
-			})
+			}
+		);
 
 		// create div for buttons:
 		const buttons = this.resultsTextBoxEl.createDiv("action-buttons");
@@ -181,16 +199,79 @@ export default class LootTableView extends ItemView {
 		const containerHeaderEl = settingsHeaderEl.createDiv("loot-table-container-header");
 		containerHeaderEl.createEl("h4", { cls: "settings-header", text: "Container:" });
 
-		// add container toggle:
+		// add include container toggle:
 		this.containerToggleDiv = settingsHeaderEl.createDiv("loot-table-container-toggle");
 		const containerTextEl = this.containerToggleDiv.createDiv("loot-table-container-text");
 		containerTextEl.createEl("p", { cls: "settings-header", text: "Include Container:" });
-		this.containerDropDownComponent = new ToggleComponent(this.containerToggleDiv)
+		this.containerToggleComponent = new ToggleComponent(this.containerToggleDiv)
 			.setTooltip("Add Container into Loot Table.")
 			.setValue(this.plugin.data.addToView)
 			.onChange(async (value) => {
 				this.containerActive = value;
-		});
+			}
+		);
+
+		// add include container gold toggle:
+		this.containerGoldToggleDiv = settingsHeaderEl.createDiv("loot-table-container-gold-toggle");
+		const containerGoldToggleTextEl = this.containerGoldToggleDiv.createDiv("loot-table-container-gold-text");
+		containerGoldToggleTextEl.createEl("p", { cls: "settings-header", text: "Include Price:" });
+		this.containerGoldToggleComponent = new ToggleComponent(this.containerGoldToggleDiv)
+			.setTooltip("Include the container's gold in the result.")
+			.setValue(this.plugin.data.addToView)
+			.onChange(async (value) => {
+				this.containerGoldActive = value;
+			}
+		);
+
+		// add include container weight toggle:
+		this.containerWeightToggleDiv = settingsHeaderEl.createDiv("loot-table-container-weight-toggle");
+		const containerWeightToggleTextEl = this.containerWeightToggleDiv.createDiv("loot-table-container-weight-text");
+		containerWeightToggleTextEl.createEl("p", { cls: "settings-header", text: "Include Weight:" });
+		this.containerWeightToggleComponent = new ToggleComponent(this.containerWeightToggleDiv)
+			.setTooltip("Include the container's weight in the result.")
+			.setValue(this.plugin.data.addToView)
+			.onChange(async (value) => {
+					this.containerWeightActive = value;
+			}
+		);
+
+		// add include container weight toggle:
+		this.containerDescriptionToggleDiv = settingsHeaderEl.createDiv("loot-table-container-description-toggle");
+		const containerDescriptionToggleTextEl = this.containerDescriptionToggleDiv.createDiv("loot-table-container-description-text");
+		containerDescriptionToggleTextEl.createEl("p", { cls: "settings-header", text: "Include Description:" });
+		this.containerDescriptionToggleComponent = new ToggleComponent(this.containerDescriptionToggleDiv)
+			.setTooltip("Include the container's description in the result.")
+			.setValue(this.plugin.data.addToView)
+			.onChange(async (value) => {
+					this.containerDescriptionActive = value;
+			}
+		);
+
+		// add include container quantity:
+		this.containerQuantityDiv = settingsHeaderEl.createDiv("loot-table-container-quantity");
+		const containerQuantityTextEl = this.containerQuantityDiv.createDiv("loot-table-container-quantity-text");
+		containerQuantityTextEl.createEl("p", { cls: "settings-header", text: "Quantity:" });
+		this.containerQuantityComponent = new TextAreaComponent(this.containerQuantityDiv)
+			.setPlaceholder("1")
+			.then((textArea) => {
+				textArea.inputEl.style.width = "35px";
+				textArea.inputEl.style.height = "28px";
+				textArea.inputEl.style.resize = "none";
+				textArea.inputEl.rows = 1;
+				textArea.inputEl.cols = 1;
+				textArea.inputEl.maxLength = 2;
+				// Prevent adding newlines
+				textArea.inputEl.addEventListener("keydown", (event) => {
+					if (event.key === "Enter") {
+						event.preventDefault(); // Prevent the newline from being added
+					}
+				});
+
+			})
+			.onChange(async (value) => {
+					this.containerQuantityValue = value;
+			}
+		);
 
 		// add container dropdown:
 		this.containerDropdownDiv = settingsHeaderEl.createDiv("loot-table-container-dropdown");
@@ -227,17 +308,23 @@ export default class LootTableView extends ItemView {
 		// // disable the roll button to prevent multiple rolls simultaneously:
 		// this.rollButton.setDisabled(true);
 
-		console.log(API.getContainer(this.selectedContainerType));
 		let Result = "";
 
 		// append container data:
 		if(this.containerActive) {
 
-			const container = API.getContainer(this.selectedContainerType);
+			const container = API.getContainer(
+				this.selectedContainerType,
+				this.containerQuantityValue,
+				this.containerGoldActive,
+				this.containerWeightActive,
+				this.containerDescriptionActive
+			);
+
 			if (!container) {
 				console.warn("Container not found for ID:", this.selectedContainerType);
 			} else {
-				Result += "Container: " + container + "\n";
+				Result += "Container: \n" + container + "\n";
 			}
 		}
 

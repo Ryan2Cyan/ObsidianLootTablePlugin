@@ -160,7 +160,7 @@ class APIInstance {
 		this.app = app;
 	}
 
-	getContainer(containerType: ContainerType): string {
+	getContainer(containerType: ContainerType, quantity: string, includeGold: boolean, includeWeight: boolean, includeDescription: boolean): string {
 
 		// load all containers from the parsed .json:
 		const containerData = this.getValueFromJSON("containers");
@@ -168,23 +168,52 @@ class APIInstance {
 			return "Error: Invalid container data.";
 		}
 		const containers = containerData.containers;
+		const containerQuantity = Number(quantity);
+		if (isNaN(containerQuantity)) {
+			console.error("Invalid quantity: " + quantity);
+			return "Invalid quantity: " + quantity;
+		}
+		let Result = "";
 
 		// if random, choose a container randomly:
 		if(containerType === ContainerType.RANDOM) {
-			const randomIndex = Math.floor(Math.random() * containerData.containers.length);
-			return containers[randomIndex].displayName;
+			for (let i = 1; i <= containerQuantity; i++) {
+				console.log(`Iteration number: ${i}`);
+				const randomIndex = Math.floor(Math.random() * containerData.containers.length);
+				Result += this.formatContainer(containers[randomIndex], includeGold, includeWeight, includeDescription) + "\n";
+			}
+			return Result;
 		}
 
 		// find the selected container by type:
 		for (const container of containers) {
 			if (container.id === containerType.valueOf()) {
-				return container.displayName;
+				for (let i = 1; i <= containerQuantity; i++) {
+					console.log(`Iteration number: ${i}`);
+					Result += this.formatContainer(container, includeGold, includeWeight, includeDescription) + "\n";
+				}
+				return Result;
 			}
 		}
 		return "Cannot find container with type: " + containerType + ".";
 	}
 
-getValueFromJSON(fileExtension: string): any | null {
+	formatContainer(containerJson: any, includeGold: boolean, includeWeight: boolean, includeDescription: boolean): string {
+
+		let Result = containerJson.displayName;
+		if(includeGold) {
+			Result += " [" + containerJson.gold + " gp ]";
+		}
+		if(includeWeight) {
+			Result += " [" + containerJson.weight + " kg ]";
+		}
+		if(includeDescription) {
+			Result += " \"" + containerJson.description + "\"";
+		}
+		return Result;
+	}
+
+	getValueFromJSON(fileExtension: string): any | null {
 
 		if (this.app.vault.adapter instanceof FileSystemAdapter) { // true if desktop
 
